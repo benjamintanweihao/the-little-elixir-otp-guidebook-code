@@ -3,6 +3,8 @@ Code for The Little Elixir & OTP Guidebook
 
 Welcome! This is the source code for "The Little Elixir & OTP Guidebook".
 
+![](http://i.imgur.com/bSJwGCJ.jpg)
+
 ## Running the code
 
 For programs that are not created by `mix`, can be run as such:
