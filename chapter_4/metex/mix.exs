@@ -14,7 +14,7 @@ defmodule Metex.Mixfile do
 
   defp deps do
     [
-      {:httpoison, "~> 0.5"},
+      {:httpoison, "~> 0.8.0"},
       {:json,      "~> 0.3.0"}
     ]
   end
