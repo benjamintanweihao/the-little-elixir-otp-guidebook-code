@@ -74,7 +74,8 @@ defmodule Metex.Worker do
   end
 
   defp url_for(location) do
-    "http://api.openweathermap.org/data/2.5/weather?q=#{location}"
+    location = URI.encode(location)
+    "http://api.openweathermap.org/data/2.5/weather?q=#{location}&appid=#{apikey}"
   end
 
   defp parse_response({:ok, %HTTPoison.Response{body: body, status_code: 200}}) do
@@ -101,6 +102,10 @@ defmodule Metex.Worker do
       false ->
         Map.put_new(old_stats, location, 1)
     end
+  end
+
+  defp apikey do
+    "969038ec2b87be02c5f1e3f1344ee286"
   end
 
 end
