@@ -15,13 +15,13 @@ defmodule Blitzy.Mixfile do
 
   def application do
     [mod: {Blitzy, []},
-     applications: [:logger, :httpoison]]
+     applications: [:logger, :httpoison, :timex]]
   end
 
   defp deps do
     [
-      {:httpoison, "~> 0.7"},
-      {:timex,     "~> 0.19"}
+      {:httpoison, "~> 0.9.0"},
+      {:timex,     "~> 3.0"}
     ]
   end
 end
