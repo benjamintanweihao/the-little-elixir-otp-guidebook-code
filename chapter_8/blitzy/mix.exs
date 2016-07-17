@@ -21,7 +21,8 @@ defmodule Blitzy.Mixfile do
   defp deps do
     [
       {:httpoison, "~> 0.9.0"},
-      {:timex,     "~> 3.0"}
+      {:timex,     "~> 3.0"},
+      {:tzdata, "~> 0.1.8", override: true}
     ]
   end
 end

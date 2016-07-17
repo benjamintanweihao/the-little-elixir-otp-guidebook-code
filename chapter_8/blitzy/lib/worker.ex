@@ -3,8 +3,8 @@ defmodule Blitzy.Worker do
   require Logger
 
   def start(url) do
-    {timestamp, response} = Time.measure(fn -> HTTPoison.get(url) end)
-    handle_response({Time.to_msecs(timestamp), response})
+    {timestamp, response} = Duration.measure(fn -> HTTPoison.get(url) end)
+    handle_response({Duration.to_milliseconds(timestamp), response})
   end
 
   defp handle_response({msecs, {:ok, %HTTPoison.Response{status_code: code}}})
