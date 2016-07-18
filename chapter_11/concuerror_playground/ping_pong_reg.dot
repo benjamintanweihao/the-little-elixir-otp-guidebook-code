@@ -1,0 +1,9 @@
+digraph {
+  graph [ranksep=0.3]
+  node [shape=box,width=7,fontname=Monospace]
+  init [label="Initial"];
+  subgraph {
+    "#Ref<0.0.1.111>" [label="1: Error ([P] blocked)",style=filled,fillcolor=red];
+    "init" -> "#Ref<0.0.1.111>"[weight=1000];
+  }
+}

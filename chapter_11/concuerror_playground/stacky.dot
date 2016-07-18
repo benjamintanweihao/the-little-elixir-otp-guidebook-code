@@ -1,0 +1,73 @@
+digraph {
+  graph [ranksep=0.3]
+  node [shape=box,width=7,fontname=Monospace]
+  init [label="Initial"];
+  subgraph {
+    "#Ref<0.0.1.90>" [label="        1: P: undefined = erlang:whereis('Elixir.Stacky')\l"];
+    "init" -> "#Ref<0.0.1.90>"[weight=1000];
+    "#Ref<0.0.1.128>" [label="        2: P: [] = erlang:process_info(P, registered_name)\l"];
+    "#Ref<0.0.1.90>" -> "#Ref<0.0.1.128>"[weight=1000];
+    "#Ref<0.0.1.140>" [label="        3: P: P.1 = erlang:spawn_opt({...})\l"];
+    "#Ref<0.0.1.128>" -> "#Ref<0.0.1.140>"[weight=1000];
+    "#Ref<0.0.1.151>" [label="        4: P.1: undefined = erlang:put('$ancestors', [...])\l"];
+    "#Ref<0.0.1.140>" -> "#Ref<0.0.1.151>"[weight=1000];
+    "#Ref<0.0.1.154>" [label="        5: P.1: undefined = erlang:put('$initial_call', {...})\l"];
+    "#Ref<0.0.1.151>" -> "#Ref<0.0.1.154>"[weight=1000];
+    "#Ref<0.0.1.157>" [label="        6: P.1: true = erlang:register('Elixir.Stacky', P.1)\l"];
+    "#Ref<0.0.1.154>" -> "#Ref<0.0.1.157>"[weight=1000];
+    "#Ref<0.0.1.160>" [label="        7: P.1: {...} = P ! {...}\l"];
+    "#Ref<0.0.1.157>" -> "#Ref<0.0.1.160>"[weight=1000];
+    "#Ref<0.0.1.173>" [label="        8: Message ({...}) from P.1 reaches P\l"];
+    "#Ref<0.0.1.160>" -> "#Ref<0.0.1.173>"[weight=1000];
+    "#Ref<0.0.1.177>" [label="        9: P: receives message ({...})\l"];
+    "#Ref<0.0.1.173>" -> "#Ref<0.0.1.177>"[weight=1000];
+    "#Ref<0.0.1.180>" [label="       10: P: P.1 = erlang:whereis('Elixir.Stacky')\l"];
+    "#Ref<0.0.1.177>" -> "#Ref<0.0.1.180>"[weight=1000];
+    "#Ref<0.0.1.182>" [label="       11: P: #Ref<0.0.1.185> = erlang:monitor(process, P.1)\l"];
+    "#Ref<0.0.1.180>" -> "#Ref<0.0.1.182>"[weight=1000];
+    "#Ref<0.0.1.186>" [label="       12: P: {...} = erlang:send(P.1, {...}, [...])\l"];
+    "#Ref<0.0.1.182>" -> "#Ref<0.0.1.186>"[weight=1000];
+    "#Ref<0.0.1.190>" [label="       13: Message ({...}) from P reaches P.1\l"];
+    "#Ref<0.0.1.186>" -> "#Ref<0.0.1.190>"[weight=1000];
+    "#Ref<0.0.1.194>" [label="       14: P.1: receives message ({...})\l"];
+    "#Ref<0.0.1.190>" -> "#Ref<0.0.1.194>"[weight=1000];
+    "#Ref<0.0.1.197>" [label="       15: P.1: {...} = P ! {...}\l"];
+    "#Ref<0.0.1.194>" -> "#Ref<0.0.1.197>"[weight=1000];
+    "#Ref<0.0.1.201>" [label="       16: Message ({...}) from P.1 reaches P\l"];
+    "#Ref<0.0.1.197>" -> "#Ref<0.0.1.201>"[weight=1000];
+    "#Ref<0.0.1.205>" [label="       17: P: receives message ({...})\l"];
+    "#Ref<0.0.1.201>" -> "#Ref<0.0.1.205>"[weight=1000];
+    "#Ref<0.0.1.208>" [label="       18: P: true = erlang:demonitor(#Ref<0.0.1.185>, [...])\l"];
+    "#Ref<0.0.1.205>" -> "#Ref<0.0.1.208>"[weight=1000];
+    "#Ref<0.0.1.211>" [label="       19: P: P.1 = erlang:whereis('Elixir.Stacky')\l"];
+    "#Ref<0.0.1.208>" -> "#Ref<0.0.1.211>"[weight=1000];
+    "#Ref<0.0.1.214>" [label="       20: P: #Ref<0.0.1.217> = erlang:monitor(process, P.1)\l"];
+    "#Ref<0.0.1.211>" -> "#Ref<0.0.1.214>"[weight=1000];
+    "#Ref<0.0.1.218>" [label="       21: P: {...} = erlang:send(P.1, {...}, [...])\l"];
+    "#Ref<0.0.1.214>" -> "#Ref<0.0.1.218>"[weight=1000];
+    "#Ref<0.0.1.222>" [label="       22: Message ({...}) from P reaches P.1\l"];
+    "#Ref<0.0.1.218>" -> "#Ref<0.0.1.222>"[weight=1000];
+    "#Ref<0.0.1.225>" [label="       23: P.1: receives message ({...})\l"];
+    "#Ref<0.0.1.222>" -> "#Ref<0.0.1.225>"[weight=1000];
+    "#Ref<0.0.1.229>" [label="       24: P.1: exits normally\l",color=lime,penwidth=5];
+    "#Ref<0.0.1.225>" -> "#Ref<0.0.1.229>"[weight=1000];
+    "#Ref<0.0.1.232>" [label="       25: P.1: true = erlang:exit(P, normal)\l"];
+    "#Ref<0.0.1.229>" -> "#Ref<0.0.1.232>"[weight=1000];
+    "#Ref<0.0.1.236>" [label="       26: P.1: {...} = erlang:send(P, {...})\l"];
+    "#Ref<0.0.1.232>" -> "#Ref<0.0.1.236>"[weight=1000];
+    "#Ref<0.0.1.240>" [label="       27: Exit signal (normal) from P.1 reaches P\l"];
+    "#Ref<0.0.1.236>" -> "#Ref<0.0.1.240>"[weight=1000];
+    "#Ref<0.0.1.243>" [label="       28: Message ({...}) from P.1 reaches P\l"];
+    "#Ref<0.0.1.240>" -> "#Ref<0.0.1.243>"[weight=1000];
+    "#Ref<0.0.1.247>" [label="       29: P: receives message ({...})\l"];
+    "#Ref<0.0.1.243>" -> "#Ref<0.0.1.247>"[weight=1000];
+    "#Ref<0.0.1.250>" [label="       30: P: exits abnormally ({...})\l",color=red,penwidth=5];
+    "#Ref<0.0.1.247>" -> "#Ref<0.0.1.250>"[weight=1000];
+    "#Ref<0.0.1.253>" [label="       31: P: true = erlang:exit(P.1, {...})\l"];
+    "#Ref<0.0.1.250>" -> "#Ref<0.0.1.253>"[weight=1000];
+    "#Ref<0.0.1.257>" [label="       32: Exit signal ({...}) from P reaches P.1\l"];
+    "#Ref<0.0.1.253>" -> "#Ref<0.0.1.257>"[weight=1000];
+    "#Ref<0.0.1.292>" [label="1: Ok",style=filled,fillcolor=lime];
+    "#Ref<0.0.1.257>" -> "#Ref<0.0.1.292>"[weight=1000];
+  }
+}

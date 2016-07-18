@@ -1,0 +1,41 @@
+digraph {
+  graph [ranksep=0.3]
+  node [shape=box,width=7,fontname=Monospace]
+  init [label="Initial"];
+  subgraph {
+    "#Ref<0.0.1.90>" [label="        1: P: P.1 = erlang:spawn(erlang, apply, [...])\l"];
+    "init" -> "#Ref<0.0.1.90>"[weight=1000];
+    "#Ref<0.0.1.111>" [label="        2: P: true = erlang:link(P.1)\l"];
+    "#Ref<0.0.1.90>" -> "#Ref<0.0.1.111>"[weight=1000];
+    "#Ref<0.0.1.115>" [label="        3: P: exits normally\l",color=lime,penwidth=5];
+    "#Ref<0.0.1.111>" -> "#Ref<0.0.1.115>"[weight=1000];
+    "#Ref<0.0.1.117>" [label="        4: P: true = erlang:exit(P.1, normal)\l"];
+    "#Ref<0.0.1.115>" -> "#Ref<0.0.1.117>"[weight=1000];
+    "#Ref<0.0.1.120>" [label="        5: Exit signal (normal) from P reaches P.1\l"];
+    "#Ref<0.0.1.117>" -> "#Ref<0.0.1.120>"[weight=1000];
+    "#Ref<0.0.1.122>" [label="        6: P.1: receive timeout expired after 5000 ms\l"];
+    "#Ref<0.0.1.120>" -> "#Ref<0.0.1.122>"[weight=1000];
+    "#Ref<0.0.1.124>" [label="        7: P.1: exits normally\l",color=lime,penwidth=5];
+    "#Ref<0.0.1.122>" -> "#Ref<0.0.1.124>"[weight=1000];
+    "#Ref<0.0.1.126>" [label="        8: P.1: true = erlang:exit(P, normal)\l"];
+    "#Ref<0.0.1.124>" -> "#Ref<0.0.1.126>"[weight=1000];
+    "#Ref<0.0.1.129>" [label="        9: Exit signal (normal) from P.1 reaches P\l"];
+    "#Ref<0.0.1.126>" -> "#Ref<0.0.1.129>"[weight=1000];
+    "#Ref<0.0.1.111>":e -> "#Ref<0.0.1.124>":e[constraint=false, color=red, dir=back, penwidth=3, style=dashed];
+    "#Ref<0.0.1.161>" [label="1: Ok",style=filled,fillcolor=lime];
+    "#Ref<0.0.1.129>" -> "#Ref<0.0.1.161>"[weight=1000];
+  }
+  subgraph{
+    "#Ref<0.0.1.145>" [label="        2: P.1: receive timeout expired after 5000 ms\l"];
+    "#Ref<0.0.1.90>" -> "#Ref<0.0.1.145>"[style=invis,weight=1];
+    "#Ref<0.0.1.111>" -> "#Ref<0.0.1.145>"[constraint=false];
+    "#Ref<0.0.1.148>" [label="        3: P.1: exits normally\l",color=lime,penwidth=5];
+    "#Ref<0.0.1.145>" -> "#Ref<0.0.1.148>"[weight=1000];
+    "#Ref<0.0.1.150>" [label="        4: P: Exception noproc raised by: erlang:link(P.1)\l",color=orange,penwidth=5];
+    "#Ref<0.0.1.148>" -> "#Ref<0.0.1.150>"[weight=1000];
+    "#Ref<0.0.1.153>" [label="        5: P: exits abnormally ({...})\l",color=red,penwidth=5];
+    "#Ref<0.0.1.150>" -> "#Ref<0.0.1.153>"[weight=1000];
+    "#Ref<0.0.1.181>" [label="2: Error",style=filled,fillcolor=red];
+    "#Ref<0.0.1.153>" -> "#Ref<0.0.1.181>"[weight=1000];
+  }
+}

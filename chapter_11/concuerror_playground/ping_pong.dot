@@ -1,0 +1,23 @@
+digraph {
+  graph [ranksep=0.3]
+  node [shape=box,width=7,fontname=Monospace]
+  init [label="Initial"];
+  subgraph {
+    "#Ref<0.0.1.90>" [label="        1: P: P.1 = erlang:spawn(erlang, apply, [...])\l"];
+    "init" -> "#Ref<0.0.1.90>"[weight=1000];
+    "#Ref<0.0.1.111>" [label="        2: P: P.2 = erlang:spawn(erlang, apply, [...])\l"];
+    "#Ref<0.0.1.90>" -> "#Ref<0.0.1.111>"[weight=1000];
+    "#Ref<0.0.1.115>" [label="        3: P: exits normally\l",color=lime,penwidth=5];
+    "#Ref<0.0.1.111>" -> "#Ref<0.0.1.115>"[weight=1000];
+    "#Ref<0.0.1.117>" [label="        4: P.2: pong = erlang:send(P.1, pong)\l"];
+    "#Ref<0.0.1.115>" -> "#Ref<0.0.1.117>"[weight=1000];
+    "#Ref<0.0.1.120>" [label="        5: Message (pong) from P.2 reaches P.1\l"];
+    "#Ref<0.0.1.117>" -> "#Ref<0.0.1.120>"[weight=1000];
+    "#Ref<0.0.1.122>" [label="        6: P.1: receives message (pong)\l"];
+    "#Ref<0.0.1.120>" -> "#Ref<0.0.1.122>"[weight=1000];
+    "#Ref<0.0.1.124>" [label="        7: P.1: exits normally\l",color=lime,penwidth=5];
+    "#Ref<0.0.1.122>" -> "#Ref<0.0.1.124>"[weight=1000];
+    "#Ref<0.0.1.153>" [label="1: Error ([P.2] blocked)",style=filled,fillcolor=red];
+    "#Ref<0.0.1.124>" -> "#Ref<0.0.1.153>"[weight=1000];
+  }
+}
