@@ -1,0 +1,3 @@
+%{"eqc_ex": {:hex, :eqc_ex, "1.2.4"},
+  "excheck": {:hex, :excheck, "0.3.2"},
+  "triq": {:git, "https://github.com/krestenkrab/triq.git", "c7306b8eaea133d52140cb828817efb5e50a3d52", []}}

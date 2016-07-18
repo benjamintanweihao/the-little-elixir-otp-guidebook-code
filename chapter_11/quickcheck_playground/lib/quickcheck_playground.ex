@@ -1,0 +1,2 @@
+defmodule QuickcheckPlayground do
+end
