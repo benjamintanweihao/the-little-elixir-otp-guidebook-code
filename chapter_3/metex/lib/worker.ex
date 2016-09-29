@@ -7,11 +7,11 @@ defmodule Metex.Worker do
       _ ->
         IO.puts "don't know how to process this message"
     end
-    loop 
+    loop
   end
 
   defp temperature_of(location) do
-    result = url_for(location) |> HTTPoison.get |> parse_response 
+    result = url_for(location) |> HTTPoison.get |> parse_response
     case result do
       {:ok, temp} ->
         "#{location}: #{temp}°C"
@@ -43,7 +43,7 @@ defmodule Metex.Worker do
   end
 
   defp apikey do
-    "969038ec2b87be02c5f1e3f1344ee286"
+    Application.fetch_env!(:metex, :api_key)
   end
 
 end

@@ -39,12 +39,12 @@ defmodule Metex.Worker do
 
       _ ->
 
-        {:reply, :error, stats}  
+        {:reply, :error, stats}
     end
   end
 
   def handle_call(:get_stats, _from, stats) do
-    {:reply, stats, stats}  
+    {:reply, stats, stats}
   end
 
   def handle_cast(:reset_stats, _stats) do
@@ -70,7 +70,7 @@ defmodule Metex.Worker do
   ## Helper Functions
 
   defp temperature_of(location) do
-    url_for(location) |> HTTPoison.get |> parse_response 
+    url_for(location) |> HTTPoison.get |> parse_response
   end
 
   defp url_for(location) do
@@ -105,7 +105,7 @@ defmodule Metex.Worker do
   end
 
   defp apikey do
-    "969038ec2b87be02c5f1e3f1344ee286"
+    Application.fetch_env!(:metex, :api_key)
   end
 
 end
