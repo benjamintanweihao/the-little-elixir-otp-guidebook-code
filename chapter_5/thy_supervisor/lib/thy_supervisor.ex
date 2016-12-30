@@ -62,10 +62,10 @@ defmodule ThySupervisor do
     end
   end
 
-  def handle_call({:restart_child, old_pid}, _from, state) do
+  def handle_call({:restart_child, old_pid, new_child_spec}, _from, state) do
     case HashDict.fetch(state, old_pid) do
-      {:ok, child_spec} ->
-        case restart_child(old_pid, child_spec) do
+      {:ok, _} ->
+        case restart_child(old_pid, new_child_spec) do
           {:ok, {pid, child_spec}} ->
             new_state = state
                           |> HashDict.delete(old_pid)
