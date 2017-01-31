@@ -100,7 +100,7 @@ defmodule Pooly.Server do
       [{pid, ref}] ->
         true = Process.demonitor(ref)
         true = :ets.delete(monitors, pid)
-        new_state = %{state | workers: [new_worker(worker_sup)|workers]}
+        new_state = %{state | workers: [new_worker(worker_sup) | List.delete(workers, pid)]}
         {:noreply, new_state}
 
       [] ->
