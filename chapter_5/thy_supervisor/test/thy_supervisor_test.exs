@@ -27,7 +27,7 @@ defmodule ThySupervisorTest do
     Process.exit(child_pid, :crash)
     refute Process.alive?(child_pid)
 
-    new_child_pid = ThySupervisor.which_children(sup_pid) |> HashDict.keys |> List.first
+    new_child_pid = ThySupervisor.which_children(sup_pid) |> Map.keys |> List.first
 
     assert 1 == ThySupervisor.count_children(sup_pid)
     assert is_pid(new_child_pid)
