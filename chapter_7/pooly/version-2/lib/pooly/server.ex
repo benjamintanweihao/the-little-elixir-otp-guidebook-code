@@ -45,7 +45,7 @@ defmodule Pooly.Server do
   end
 
   def init([], state) do
-    send(self, :start_worker_supervisor)
+    send(self(), :start_worker_supervisor)
     {:ok, state}
   end
 

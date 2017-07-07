@@ -49,7 +49,7 @@ defmodule Pooly.PoolServer do
   end
 
   def init([], state) do
-    send(self, :start_worker_supervisor)
+    send(self(), :start_worker_supervisor)
     {:ok, state}
   end
 
@@ -106,12 +106,12 @@ defmodule Pooly.PoolServer do
     {:stop, reason, state}
   end
 
-  def handle_info({:EXIT, pid, _reason}, state = %{monitors: monitors, workers: workers, pool_sup: pool_sup}) do
+  def handle_info({:EXIT, pid, _reason}, state = %{monitors: monitors, workers: workers, worker_sup: worker_sup}) do
     case :ets.lookup(monitors, pid) do
       [{pid, ref}] ->
         true = Process.demonitor(ref)
         true = :ets.delete(monitors, pid)
-        new_state = %{state | workers: [new_worker(pool_sup)|workers]}
+        new_state = %{state | workers: [new_worker(worker_sup)|workers]}
         {:noreply, new_state}
 
       _ ->
@@ -149,7 +149,7 @@ defmodule Pooly.PoolServer do
     # NOTE: The reason this is set to temporary is because the WorkerSupervisor
     #       is started by the PoolServer.
     opts = [id: name <> "WorkerSupervisor", shutdown: 10000, restart: :temporary]
-    supervisor(Pooly.WorkerSupervisor, [self, mfa], opts)
+    supervisor(Pooly.WorkerSupervisor, [self(), mfa], opts)
   end
 
 end

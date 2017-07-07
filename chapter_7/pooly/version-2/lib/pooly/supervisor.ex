@@ -7,7 +7,7 @@ defmodule Pooly.Supervisor do
 
   def init(pool_config) do
     children = [
-      worker(Pooly.Server, [self, pool_config])
+      worker(Pooly.Server, [self(), pool_config])
     ]
 
     opts = [strategy: :one_for_all]
