@@ -8,17 +8,21 @@ defmodule ID3Parser do
 
         << _ :: binary-size(mp3_byte_size), id3_tag :: binary >> = mp3
 
-        << "TAG", title   :: binary-size(30),                             
+        << "TAG", title   :: binary-size(30),
                   artist  :: binary-size(30),
                   album   :: binary-size(30),
                   year    :: binary-size(4),
-                  _rest   :: binary >>       = id3_tag                  
+                  _rest   :: binary >>       = id3_tag
+
+        title  = String.trim title, <<0>>
+        artist = String.trim artist, <<0>>
+        album  = String.trim album, <<0>>
+
         IO.puts "#{artist} - #{title} (#{album}, #{year})"
 
-      _ ->                                                        
+      _ ->
         IO.puts "Couldn't open #{file_name}"
 
     end
   end
 end
-
