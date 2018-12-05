@@ -12,7 +12,7 @@ defmodule Pooly.PoolSupervisor do
     ]
 
     children = [
-      worker(Pooly.PoolServer, [self, pool_config])
+      worker(Pooly.PoolServer, [self(), pool_config])
     ]
 
     supervise(children, opts)

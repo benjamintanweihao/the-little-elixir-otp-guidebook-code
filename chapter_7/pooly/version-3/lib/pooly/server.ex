@@ -28,7 +28,7 @@ defmodule Pooly.Server do
 
   def init(pools_config) do
     pools_config |> Enum.each(fn(pool_config) ->
-      send(self, {:start_pool, pool_config})
+      send(self(), {:start_pool, pool_config})
     end)
 
     {:ok, pools_config}

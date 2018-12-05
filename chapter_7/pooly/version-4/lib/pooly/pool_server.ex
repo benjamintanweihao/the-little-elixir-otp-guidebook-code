@@ -62,7 +62,7 @@ defmodule Pooly.PoolServer do
   end
 
   def init([], state) do
-    send(self, :start_worker_supervisor)
+    send(self(), :start_worker_supervisor)
     {:ok, state}
   end
 
@@ -266,7 +266,7 @@ defmodule Pooly.PoolServer do
     # NOTE: The reason this is set to temporary is because the WorkerSupervisor
     #       is started by the PoolServer.
     opts = [id: name <> "WorkerSupervisor", shutdown: 10000, restart: :temporary]
-    supervisor(Pooly.WorkerSupervisor, [self, mfa], opts)
+    supervisor(Pooly.WorkerSupervisor, [self(), mfa], opts)
   end
 
   defp state_name(%State{overflow: overflow, max_overflow: max_overflow, workers: workers}) when overflow < 1 do
