@@ -80,7 +80,7 @@ defmodule ThySupervisor do
   end
 
   def handle_call(:count_children, _from, state) do
-    {:reply, Map.size(state), state}
+    {:reply, Enum.count(state), state}
   end
 
   def handle_call(:which_children, _from, state) do
